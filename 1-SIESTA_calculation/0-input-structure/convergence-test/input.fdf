@@ -1,0 +1,51 @@
+SystemName SnS2-convergence
+SystemLabel SnS2
+
+# Atomic structure .fdf format
+
+%include SnS2-mp-9984.fdf
+
+# Basis set (SZ, DZ, DZP, ...)
+
+PAO.BasisSize DZP
+
+# Exchange-correlation functional
+
+XC.functional       GGA
+XC.authors          PBE
+
+DM.UseSaveDM        .true.
+Diag.ParallelOverK  .true.
+
+# Brillouin zone sampling
+
+%block kgrid_Monkhorst_Pack
+$KX  0  0  0.0
+0  $KY  0  0.0
+0  0  $KZ  0.0
+%endblock kgrid_Monkhorst_Pack
+
+
+# Real-space integration grid
+
+MeshCutoff         $ECUT Ry
+
+# Spin treatment
+
+SpinPolarized      .false.
+
+# Self-consistent field (SCF) settings
+
+SCF.Mix              hamiltonian
+MaxSCFIterations   200
+DM.MixingWeight    0.4
+DM.Tolerance       1.d-4
+ElectronicTemperature  300 K
+DFTD3    .true.
+
+# Geometry optimization settings
+
+MD.TypeOfRun       CG
+MD.Steps           100
+MD.MaxForceTol     0.02 eV/Ang
+MD.VariableCell    .false.

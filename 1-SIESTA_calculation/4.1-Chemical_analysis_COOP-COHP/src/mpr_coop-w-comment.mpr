@@ -1,0 +1,10 @@
+SnS2-coop-cohp
+COOP
+Sn-S        : name of the curve
+Sn          : first orbital kind (here: all on Sn)
+2.0 4.0     : distance range in Ang (to catch just nearest neighbors)
+S           : second orbital kind
+Sn4dxy-S3s  : another curve
+Sn_4dxy     : only 4dxy orbitals
+2.0 4.0
+S_3s        : only 3s orbitals on the second atom

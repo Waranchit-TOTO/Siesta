@@ -1,0 +1,201 @@
+############################################################
+
+# 1. SYSTEM INFORMATION
+
+############################################################
+
+SystemName        name Surface
+SystemLabel       name
+
+############################################################
+
+# 2. ATOMIC STRUCTURE
+
+############################################################
+
+%include structure.fdf
+
+############################################################
+
+# 3. ELECTRONIC STRUCTURE SETTINGS
+
+############################################################
+
+# Basis set
+
+PAO.BasisSize      DZP
+
+# Exchange-correlation functional
+
+XC.functional      GGA
+XC.authors         PBE
+
+# Spin
+
+SpinPolarized      false
+
+# DFT+U
+
+# DFTU.ProjectorGenerationMethod 2
+
+# %block DFTU.Proj
+
+# ...
+
+# %endblock DFTU.Proj
+
+############################################################
+
+# 4. NUMERICAL ACCURACY
+
+############################################################
+
+# Real-space grid
+
+MeshCutoff         300 Ry
+
+# k-point sampling
+
+%block kgrid_Monkhorst_Pack
+5 0 0 0.0
+0 5 0 0.0
+0 0 1 0.0
+%endblock kgrid_Monkhorst_Pack
+
+############################################################
+
+# 5. SCF CONTROL
+
+############################################################
+
+MaxSCFIterations   300
+
+DM.MixingWeight    0.2
+DM.Tolerance       1.d-4
+
+SCF.Mix            hamiltonian
+SCF.Mixer.History  6
+
+ElectronicTemperature 300 K
+
+DM.UseSaveDM       true
+
+############################################################
+
+# 6. GEOMETRY OPTIMIZATION / MD
+
+############################################################
+
+MD.TypeOfRun       CG
+MD.Steps           200
+MD.MaxForceTol     0.02 eV/Ang
+MD.VariableCell    false
+
+# Optional constraints
+
+# %block Geometry.Constraints
+
+# ...
+
+# %endblock Geometry.Constraints
+
+############################################################
+
+# 7. OUTPUT FILES
+
+############################################################
+
+SaveHS             true
+SaveRho            true
+
+WriteCoorStep      true
+WriteForces        true
+
+############################################################
+
+# 8. ELECTRONIC ANALYSIS
+
+############################################################
+
+# DOS
+
+# %block ProjectedDensityOfStates
+
+# -10.0 10.0 0.01 1000 eV
+
+# %endblock ProjectedDensityOfStates
+
+# PDOS
+
+# %block PDOS.kgrid_Monkhorst_Pack
+
+# ...
+
+# %endblock PDOS.kgrid_Monkhorst_Pack
+
+# Bands
+
+# BandLinesScale ReciprocalLatticeVectors
+
+# %block BandLines
+
+# ...
+
+# %endblock BandLines
+
+############################################################
+
+# 9. CHARGE ANALYSIS
+
+############################################################
+
+WriteHirshfeldPop  true
+WriteVoronoiPop    true
+WriteMullikenPop   true
+
+############################################################
+
+# 10. TRANSIESTA (NEGF)
+
+############################################################
+
+# SolutionMethod    transiesta
+
+# TS.Voltage        0.0 eV
+
+# %include TS_device.fdf
+
+############################################################
+
+# 11. TBTRANS
+
+############################################################
+
+# %include TBtrans_device.fdf
+
+############################################################
+
+# 12. ADVANCED FEATURES
+
+############################################################
+
+# Hybrid functionals
+
+# Spin-orbit coupling
+
+# Non-collinear spin
+
+# Phonons
+
+# Molecular dynamics
+
+# Electron transport
+
+# Optical properties
+
+# DFT+U
+
+# Machine-learning workflows
+
+############################################################
+
